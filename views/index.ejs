@@ -1,0 +1,20 @@
+<%- include("partials/header", {
+  title: "Home",
+  pageCss: "index.css"
+}) %>
+
+<%- include("partials/nav") %>
+
+<!-- Uses this bootstrap "component" https://getbootstrap.com/docs/5.3/examples/heroes/ -->
+<%- include("partials/home/hero") %>
+
+<!-- Empty div for the horizontal divider -->
+<div class="grid__section"></div>
+
+<%- include("partials/home/features") %>
+
+<!-- Empty div for the horizontal divider -->
+<div class="grid__section"></div>
+
+<!-- contains footer markup & scripts -->
+<%- include("partials/footer") %>

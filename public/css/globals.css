@@ -1,0 +1,21 @@
+/* This file is responsible for overriding bootstrap defaults */
+
+:root {
+	--bs-primary-rgb: 73, 194, 122; /* #49C27A */
+}
+
+.btn-primary {
+    --bs-btn-bg: #49C27A;
+    --bs-btn-border-color: #49C27A;
+
+    --bs-btn-hover-bg: #1d8655ff;
+    --bs-btn-hover-border-color: #1d8655ff;
+}
+
+a {
+	color: #848484ff;
+}
+
+a:hover {
+	color: #49c27a;
+}

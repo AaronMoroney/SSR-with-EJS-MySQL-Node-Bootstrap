@@ -1,0 +1,8 @@
+.grid {
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+}
+/* Use BEM naming convention https://getbem.com/naming/ */
+.grid__section {
+    border-bottom: 1px solid gray;
+}
