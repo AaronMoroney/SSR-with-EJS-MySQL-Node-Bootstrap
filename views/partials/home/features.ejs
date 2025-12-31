@@ -1,4 +1,32 @@
-<div class="grid container container-fluid pt-5 pb-5">
+<% 
+const features = [ 
+	{ 
+		title: "CLI Tool", 
+		subtext: "Run `autoalt scan` to automatically alt tag all images in your project.",
+		icon: "bi bi-terminal" 
+	}, 
+	{ 
+		title: "Web Dashboard", 
+		subtext: "All in one SEO solution. Manage your project's web visibility from one place",
+		icon: "bi bi-layout-sidebar" 
+	}, 
+	{ 
+		title: "Advanced AI Models", 
+		subtext: "Powered by GPT-5 Vision and Claude 3 Opus for accurate, context-aware image descriptions.",
+		icon: "bi bi-cpu" 
+	}, 
+	{ 
+		title: "Lightning Fast", 
+		subtext: "Process thousands of images & SERP'S in minutes. Optimized for speed and User Experience.",
+		icon: "bi bi-lightning-fill" 
+	}, 
+];
+%>
+
+<div 
+	class="grid container container-fluid pt-5 pb-5"
+	id="features"
+>
 	<div>
 		<h2 class="display-5 fw-bold text-center">
 			Everything you need for accessible images
@@ -7,5 +35,16 @@
 			Autoalt provides a complete suite of tools to ensure your website is
 			accessible to everyone.
 		</p>
+		<div class="row justify-content-center pt-3 ">
+			<% features.forEach((feat, index) => { %>
+				<div class="col-lg-5 p-4 bg-white rounded m-2">
+					<i class="<%= feat.icon %> fs-1 text-primary"></i>
+					<h2><%= feat.title %></h2>
+					<p><%= feat.subtext %> </p>
+				</div>
+			<% })%>
+		</div>
 	</div>
 </div>
+
+
