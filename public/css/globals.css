@@ -5,11 +5,12 @@
 }
 
 .btn-primary {
-    --bs-btn-bg: #49C27A;
-    --bs-btn-border-color: #49C27A;
-
-    --bs-btn-hover-bg: #1d8655ff;
-    --bs-btn-hover-border-color: #1d8655ff;
+  --bs-btn-bg: #49C27A;
+  --bs-btn-border-color: #49C27A;
+  --bs-btn-hover-bg: #1d8655ff;
+  --bs-btn-hover-border-color: #1d8655ff;
+  --bs-btn-disabled-bg: #ADB5BD;
+  --bs-btn-disabled-border-color: #49C27A;
 }
 
 a {
