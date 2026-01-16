@@ -1,0 +1,41 @@
+<div class="grid container-fluid container d-flex flex-column align-items-center pt-5 pb-5">
+  <h1 class="mb-3">Pricing plans, tailored for you.</h1>
+  <ul class="d-flex flex-row">
+    <% products.forEach(product => { %>
+      <li 
+        class="w-100 h-100 m-2" 
+        style="list-style-type: none;"
+      >
+        <div class="card <%= product.is_most_popular ? 'border-primary shadow' : '' %>"">
+          <div class="card-body">
+            <span class="d-flex align-items-center">
+              <h2 class="card-title ">
+                <%= product.product_name %>
+              </h2>
+              <%- product.is_most_popular 
+                ? '<div class="badge m-1 p-2 bg-primary text-white">Most Popular</div>'
+                : ''
+              %>
+            </span>
+            <p class="card-text mb-2"><%= product.product_details %></p>
+            <ul class="">
+              <% product.product_benefits.forEach(benefit => { %>
+                <li><%= benefit %></li>
+              <% }); %>
+            </ul>
+            <!-- The following pricing element depends on 0 coming back from server -->
+            <!-- 0 will indicate, that it is the custom pricing model -->
+            <!-- we will deal with this using JavaScript Template literals -->
+            <p class="mt-2 fw-bold">
+              <%= product.product_price === 0 
+                  ? 'Custom Enterprise Price' 
+                  : `€ ${product.product_price} / month` 
+              %>
+            </p>
+            <button href="#" class="btn btn-primary" disabled>Add to cart</button>
+          </div>
+        </div>
+      </li>
+    <% }); %>
+  </ul>
+</div>
