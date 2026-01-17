@@ -3,7 +3,10 @@
   pageCss: "index.css"
 }) %>
 
-<%- include("partials/nav") %>
+<%- authenticated
+  ? include("partials/authNav")
+  : include("partials/nav")
+%>
 
 <!-- Empty div for the horizontal divider -->
 <div class="grid__section"></div>
