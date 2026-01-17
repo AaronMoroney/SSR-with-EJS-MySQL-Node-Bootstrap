@@ -1,13 +1,19 @@
-<%- include("partials/header", { title: "Home", pageCss: "index.css" }) %> <%-
-include("partials/nav") %>
+<%- include("partials/header", { title: "Home", pageCss: "index.css" }) %> 
+
+<%- include("partials/nav") %>
+
 <!-- Empty div for the horizontal divider -->
 <div class="grid__section"></div>
 
+<!-- Empty div for the horizontal divider -->
 <%- include("partials/pricing/cards") %>
 
 <div class="grid__section"></div>
 
-<%- include("partials/pricing/cta") %>
+<% if (!authenticated) { %>
+    <div class="grid__section"></div>
+    <%- include("partials/pricing/cta") %>  
+<% } %>
 
 <!-- contains footer markup & scripts -->
 <%- include("partials/footer") %>
