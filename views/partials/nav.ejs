@@ -28,8 +28,13 @@
 			</div>
 			<!-- nav actions -->
 			<div class="d-flex align-items-center">
-				<a href="/login" class="me-3 text-decoration-none"> Login </a>
-				<a href="/signup" class="btn btn-primary me-2"> Signup </a>
+				<% if(currentPath !== '/login') {%>
+					<a href="/login" class="me-3 text-decoration-none"> Login </a>
+				<% } %>
+				
+				<% if(currentPath !== '/signup') {%>
+					<a href="/signup" class="btn btn-primary me-2"> Signup </a>
+				<% } %>
 			</div>
 		</div>
 	</div>
