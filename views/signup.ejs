@@ -45,19 +45,24 @@
           required=""
         >
         <label 
-          for="inputPassword" 
+          for="confirmPassword" 
           class="sr-only"
         >
-          Name
+          Confirm Password
         </label>
         <input 
-          type="text" 
-          id="inputPassword" 
-          name="name"
+          type="password" 
+          id="confirmPassword" 
+          name="confirmPassword"
           class="form-control mb-3" 
-          placeholder="Name" 
+          placeholder="Confirm Password" 
           required=""
         >
+        <% if (error) { %>
+            <div class="alert alert-danger">
+              <%= error %>
+            </div>
+          <% } %>
         <span class="d-flex flex-column">
           <a  
             class="mb-2 text-center" 
