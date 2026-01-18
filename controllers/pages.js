@@ -2,36 +2,48 @@ const auth = require('../auth');
 const utils = require('../utils');
 
 exports.home = (req, res) => res.render('index');
-exports.showLogin = (req, res) => res.render('login');
-exports.showSignup = (req, res) => res.render('signup');
 
-exports.pricing = (req, res) => {
-	utils.getProducts((err, products) => {
-		if (err) return res.status(500).send('Error retrieving products');
-		res.render('pricing', { products });
+exports.showSignup = (req, res) =>
+	res.render('signup', {
+		// pass some empty values for error to prevent a page crash
+		error: null,
+		values: {},
 	});
-};
+
+exports.showLogin = (req, res) =>
+	res.render('login', {
+		// pass some empty values for error to prevent a page crash
+		error: null,
+		values: {},
+	});
 
 exports.login = (req, res, next) => {
 	const { email, password } = req.body;
 
-	auth.authenticateUser(email, password, (err, authenticated) => {
+	auth.authenticateUser(email, password, (err, result) => {
+		// account for db errors
 		if (err) {
 			console.error('Auth DB error:', err);
 			return res.status(500).send('Server error');
 		}
 
-		if (!authenticated) {
-			return res.render('login');
+		if (!result.authenticated) {
+			return res.render('login', {
+				error: result.message,
+				// repopulate form
+				values: { email },
+			});
 		}
 
+		// ** some ** below logic and associated comments can be found here
 		// https://www.npmjs.com/package/express-session
+		// create a session
 		req.session.regenerate(function (err) {
 			if (err) {
 				next(err);
 			}
 
-			// store user information in session, typically a user id
+			// store user information in session
 			// in this case I will use email
 			req.session.user = req.body.email;
 
@@ -48,32 +60,52 @@ exports.login = (req, res, next) => {
 };
 
 exports.signup = (req, res) => {
-	const { email, password, name } = req.body;
+	const { email, password, confirmPassword } = req.body;
 
-	auth.createUser(email, password, name);
-	res.render('login');
+	auth.createUser(email, password, confirmPassword, (err, result) => {
+		if (err) {
+			console.error("Create user DB error:", err);
+			return res
+				.status(500)
+				.send("Server error");
+		}
+
+		if (!result.ok) {
+			return res.render('signup', {
+				error: result.message,
+				// repopulate form
+				values: { email },
+			});
+		}
+		return res.redirect("/login")
+	});
 };
 
+// below logic and associated comments can be found here
 // https://www.npmjs.com/package/express-session
 exports.logout = (req, res, next) => {
 	// logout logic
-
-	// clear the user from the session object and save.
-	// this will ensure that re-using the old session id
-	// does not have a logged in user
 	req.session.user = null;
 	req.session.save(function (err) {
 		if (err) {
 			next(err);
 		}
 
-		// regenerate the session, which is good practice to help
-		// guard against forms of session fixation
 		req.session.regenerate(function (err) {
 			if (err) {
 				next(err);
 			}
 			res.redirect('/');
 		});
+	});
+};
+
+exports.pricing = (req, res) => {
+	utils.getProducts((err, products) => {
+		if (err) return res
+			.status(500)
+			.send('Error retrieving products');
+
+		res.render('pricing', { products });
 	});
 };

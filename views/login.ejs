@@ -53,6 +53,11 @@
           >
             Not a member? sign-up
           </a>
+          <% if (error) { %>
+            <div class="alert alert-danger">
+              <%= error %>
+            </div>
+          <% } %>
           <button 
             class="btn btn-lg btn-primary btn-block" 
             type="submit"
